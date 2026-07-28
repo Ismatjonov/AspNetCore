@@ -560,12 +560,31 @@ app.Run();*/
 
 
 // -------- Extracting to the seperated methods --------
-app.Map("/index", Index);
+/*app.Map("/index", Index);
 app.Map("/about", About);
 
 app.Run(async context => await context.Response.WriteAsync("Page not found!"));
 app.Run();
 
+void Index(IApplicationBuilder appBuilder)
+{
+    appBuilder.Run(async context => await context.Response.WriteAsync("Index Page!"));
+}
+void About(IApplicationBuilder appBuilder)
+{
+    appBuilder.Run(async context => await context.Response.WriteAsync("About Page!"));
+}*/
+
+// -------- Nested Map methods --------
+app.Map("/home", appBuilder =>
+{
+    appBuilder.Map("/index", Index);
+    appBuilder.Map("/about", About);
+    appBuilder.Run(async context => await context.Response.WriteAsync("Home Page!"));
+});
+
+app.Run(async context => await context.Response.WriteAsync("Page not found!"));
+app.Run();
 void Index(IApplicationBuilder appBuilder)
 {
     appBuilder.Run(async context => await context.Response.WriteAsync("Index Page!"));
