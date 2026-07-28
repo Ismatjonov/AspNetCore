@@ -533,7 +533,7 @@ app.Run();*/
 
 
 // ==================== Method Map() ====================
-app.Map("/time", appBuilder =>
+/*app.Map("/time", appBuilder =>
 {
     var time = DateTime.Now.ToShortTimeString();
     appBuilder.Use(async (context, next) =>
@@ -542,6 +542,18 @@ app.Map("/time", appBuilder =>
         await next(context);
     });
     appBuilder.Run(async context => await context.Response.WriteAsync($"Time: {time}"));
+});
+app.Run(async context => await context.Response.WriteAsync("Hello World!"));
+app.Run();*/
+
+// ------ Creating other branches for different path ------
+app.Map("/index", appBuilder =>
+{
+    appBuilder.Run(async context => await context.Response.WriteAsync("Index Page!"));
+});
+app.Map("/about", appBuilder =>
+{
+    appBuilder.Run(async context => await context.Response.WriteAsync("About Page!"));
 });
 app.Run(async context => await context.Response.WriteAsync("Hello World!"));
 app.Run();
