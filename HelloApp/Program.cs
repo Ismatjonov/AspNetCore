@@ -547,7 +547,7 @@ app.Run(async context => await context.Response.WriteAsync("Hello World!"));
 app.Run();*/
 
 // ------ Creating other branches for different path ------
-app.Map("/index", appBuilder =>
+/*app.Map("/index", appBuilder =>
 {
     appBuilder.Run(async context => await context.Response.WriteAsync("Index Page!"));
 });
@@ -556,7 +556,25 @@ app.Map("/about", appBuilder =>
     appBuilder.Run(async context => await context.Response.WriteAsync("About Page!"));
 });
 app.Run(async context => await context.Response.WriteAsync("Hello World!"));
+app.Run();*/
+
+
+// -------- Extracting to the seperated methods --------
+app.Map("/index", Index);
+app.Map("/about", About);
+
+app.Run(async context => await context.Response.WriteAsync("Page not found!"));
 app.Run();
+
+void Index(IApplicationBuilder appBuilder)
+{
+    appBuilder.Run(async context => await context.Response.WriteAsync("Index Page!"));
+}
+void About(IApplicationBuilder appBuilder)
+{
+    appBuilder.Run(async context => await context.Response.WriteAsync("About Page!"));
+}
+
 
 // = = = = = = = = = = METHODS = = = = = = = = = =
 
