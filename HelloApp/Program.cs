@@ -607,8 +607,14 @@ app.Run(async context => await context.Response.WriteAsync("Hello World!"));
 app.Run();*/
 
 // ------ Passing parameters -------
-app.UseToken("55555");
+/*app.UseToken("55555");
 app.Run(async context => await context.Response.WriteAsync("Hello World!"));
+app.Run();*/
+
+// ============== Building a Request Processing Pipeline ==============
+app.UseMiddleware<AuthenticationMiddleware>();
+app.UseMiddleware<RoutingMiddleware>();
+
 app.Run();
 
 
