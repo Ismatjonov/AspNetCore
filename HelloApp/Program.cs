@@ -1,6 +1,7 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
+using HelloApp;
 using Microsoft.Extensions.FileProviders;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
@@ -576,7 +577,7 @@ void About(IApplicationBuilder appBuilder)
 }*/
 
 // -------- Nested Map methods --------
-app.Map("/home", appBuilder =>
+/*app.Map("/home", appBuilder =>
 {
     appBuilder.Map("/index", Index);
     appBuilder.Map("/about", About);
@@ -592,7 +593,18 @@ void Index(IApplicationBuilder appBuilder)
 void About(IApplicationBuilder appBuilder)
 {
     appBuilder.Run(async context => await context.Response.WriteAsync("About Page!"));
-}
+}*/
+
+
+// ===================== Middleware classes =====================
+/*app.UseMiddleware<TokenMiddleWare>();
+app.Run(async context => await context.Response.WriteAsync("Hello World!"));
+app.Run();*/
+
+// -------- Extension methods for embedding middleware ---------
+app.UseToken();
+app.Run(async context => await context.Response.WriteAsync("Hello World!"));
+app.Run();
 
 
 // = = = = = = = = = = METHODS = = = = = = = = = =
