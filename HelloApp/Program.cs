@@ -520,7 +520,7 @@ void HadleTimerequest(IApplicationBuilder appBuilder)
 }*/
 
 // ==================== MapWhen ====================
-app.MapWhen(
+/*app.MapWhen(
     context => context.Request.Path == "/time",
     appBuilder => appBuilder.Run(async context =>
     {
@@ -528,6 +528,21 @@ app.MapWhen(
         await context.Response.WriteAsync($"Time: {time}");
     })
 );
+app.Run(async context => await context.Response.WriteAsync("Hello World!"));
+app.Run();*/
+
+
+// ==================== Method Map() ====================
+app.Map("/time", appBuilder =>
+{
+    var time = DateTime.Now.ToShortTimeString();
+    appBuilder.Use(async (context, next) =>
+    {
+        Console.WriteLine($"Time: {time}");
+        await next(context);
+    });
+    appBuilder.Run(async context => await context.Response.WriteAsync($"Time: {time}"));
+});
 app.Run(async context => await context.Response.WriteAsync("Hello World!"));
 app.Run();
 
