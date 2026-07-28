@@ -602,7 +602,12 @@ app.Run(async context => await context.Response.WriteAsync("Hello World!"));
 app.Run();*/
 
 // -------- Extension methods for embedding middleware ---------
-app.UseToken();
+/*app.UseToken();
+app.Run(async context => await context.Response.WriteAsync("Hello World!"));
+app.Run();*/
+
+// ------ Passing parameters -------
+app.UseToken("55555");
 app.Run(async context => await context.Response.WriteAsync("Hello World!"));
 app.Run();
 
