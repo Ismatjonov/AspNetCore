@@ -612,6 +612,7 @@ app.Run(async context => await context.Response.WriteAsync("Hello World!"));
 app.Run();*/
 
 // ============== Building a Request Processing Pipeline ==============
+app.UseMiddleware<ErrorHandlingMiddleware>();
 app.UseMiddleware<AuthenticationMiddleware>();
 app.UseMiddleware<RoutingMiddleware>();
 
