@@ -620,6 +620,7 @@ app.Run();*/
 
 
 // ==================== IWebHostEnvironment and environment ====================
+/*app.Environment.EnvironmentName = "Production";
 if (app.Environment.IsDevelopment())
 {
     app.Run(async context => await context.Response.WriteAsync("In Development Stage"));
@@ -630,8 +631,21 @@ else
 }
 
 Console.WriteLine($"{app.Environment.EnvironmentName} is running.");
-app.Run();
+app.Run();*/
 
+
+// -------- Defining your environmental state --------
+app.Environment.EnvironmentName = "Test";
+
+if (app.Environment.IsEnvironment("Test"))
+{
+    app.Run(async context => await context.Response.WriteAsync("In Test Stage"));
+}
+else
+{
+    app.Run(async context => await context.Response.WriteAsync("In Development or Production Stage"));
+}
+app.Run();
 
 // = = = = = = = = = = METHODS = = = = = = = = = =
 
