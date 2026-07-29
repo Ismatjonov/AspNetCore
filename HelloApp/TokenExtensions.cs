@@ -1,4 +1,4 @@
-namespace HelloApp;
+namespace AspNetCoreBasic;
 
 public static class TokenExtensions
 {
