@@ -612,10 +612,24 @@ app.Run(async context => await context.Response.WriteAsync("Hello World!"));
 app.Run();*/
 
 // ============== Building a Request Processing Pipeline ==============
-app.UseMiddleware<ErrorHandlingMiddleware>();
+/*app.UseMiddleware<ErrorHandlingMiddleware>();
 app.UseMiddleware<AuthenticationMiddleware>();
 app.UseMiddleware<RoutingMiddleware>();
 
+app.Run();*/
+
+
+// ==================== IWebHostEnvironment and environment ====================
+if (app.Environment.IsDevelopment())
+{
+    app.Run(async context => await context.Response.WriteAsync("In Development Stage"));
+}
+else
+{
+    app.Run(async context => await context.Response.WriteAsync("In Production Stage"));
+}
+
+Console.WriteLine($"{app.Environment.EnvironmentName} is running.");
 app.Run();
 
 
