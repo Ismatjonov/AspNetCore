@@ -2,6 +2,7 @@ using System.Text;
 using Microsoft.Extensions.Primitives;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddMvc();
 var services = builder.Services;
 var app = builder.Build();
 
