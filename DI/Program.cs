@@ -6,11 +6,14 @@ var builder = WebApplication.CreateBuilder(args);
 // builder.Services.AddMvc();
 // var services = builder.Services;
 
-builder.Services.AddTransient<ITimeService, ShortTimeService>();
+// builder.Services.AddTransient<ITimeService, ShortTimeService>();
 
 // builder.Services.AddTransient<TimeService>();
 
-builder.Services.AddTimeService();
+builder.Services.AddTransient<ITimeService, ShortTimeService>();
+builder.Services.AddTransient<TimeMessage>();
+
+// builder.Services.AddTimeService();
 
 var app = builder.Build();
 
@@ -60,9 +63,17 @@ var app = builder.Build();
 
 
 // ---------- HttpContext.RequestServices ----------
-app.Run(async context =>
+/*app.Run(async context =>
 {
     var timeService = context.RequestServices.GetService<TimeService>();
     await context.Response.WriteAsync($"Time: {timeService?.GetTime()}");
+});*/
+
+// ---------- Constructors ----------
+app.Run(async context =>
+{
+    var timeMessage = context.RequestServices.GetService<TimeMessage>();
+    context.Response.ContentType = "text/html; charset=utf-8";
+    await context.Response.WriteAsync($"<h2>{timeMessage?.GetTime()}</h2>");
 });
 app.Run();
