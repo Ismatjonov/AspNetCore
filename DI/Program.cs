@@ -8,7 +8,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 // builder.Services.AddTransient<ITimeService, LongTimeService>();
 
-builder.Services.AddTransient<TimeService>();
+// builder.Services.AddTransient<TimeService>();
+
+builder.Services.AddTimeService();
 
 var app = builder.Build();
 
@@ -39,9 +41,13 @@ var app = builder.Build();
 });*/
 
 // -------- Service as a specific class --------
-app.Run(async context =>
+/*app.Run(async context =>
 {
     var timeService = context.RequestServices.GetService<TimeService>();
     await context.Response.WriteAsync($"Time: {timeService?.GetTime()}");
-});
+});*/
+
+
+// -------- Extension for adding services ----------
+
 app.Run();
