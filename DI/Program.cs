@@ -1,12 +1,14 @@
 using System.Text;
+using DI;
 using Microsoft.Extensions.Primitives;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddMvc();
-var services = builder.Services;
+// builder.Services.AddMvc();
+// var services = builder.Services;
+builder.Services.AddTransient<ITimeService, LongTimeService>();
 var app = builder.Build();
 
-app.Run(async (context) =>
+/*app.Run(async (context) =>
 {
     var sb = new StringBuilder();
     sb.Append("<h1>All Services</h1>");
@@ -23,6 +25,12 @@ app.Run(async (context) =>
     sb.Append("</table>");
     context.Response.ContentType = "text/html; charset=utf-8";
     await context.Response.WriteAsync(sb.ToString());
-});
+});*/
 
+// =============== Creating services ===============
+app.Run(async context =>
+{
+    var timeService = app.Services.GetService<ITimeService>();
+    await context.Response.WriteAsync($"Time: {timeService?.GetTime()}");
+});
 app.Run();
