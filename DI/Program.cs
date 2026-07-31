@@ -52,9 +52,17 @@ var app = builder.Build();
 // code in line 11...
 
 // ===================== Getting dependencies ====================
-app.Run(async (context) =>
+/*app.Run(async (context) =>
 {
     var timeService = app.Services.GetRequiredService<ITimeService>();
+    await context.Response.WriteAsync($"Time: {timeService?.GetTime()}");
+});*/
+
+
+// ---------- HttpContext.RequestServices ----------
+app.Run(async context =>
+{
+    var timeService = context.RequestServices.GetService<TimeService>();
     await context.Response.WriteAsync($"Time: {timeService?.GetTime()}");
 });
 app.Run();
