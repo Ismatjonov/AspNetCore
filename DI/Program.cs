@@ -5,7 +5,11 @@ using Microsoft.Extensions.Primitives;
 var builder = WebApplication.CreateBuilder(args);
 // builder.Services.AddMvc();
 // var services = builder.Services;
-builder.Services.AddTransient<ITimeService, LongTimeService>();
+
+// builder.Services.AddTransient<ITimeService, LongTimeService>();
+
+builder.Services.AddTransient<TimeService>();
+
 var app = builder.Build();
 
 /*app.Run(async (context) =>
@@ -28,9 +32,16 @@ var app = builder.Build();
 });*/
 
 // =============== Creating services ===============
-app.Run(async context =>
+/*app.Run(async context =>
 {
     var timeService = app.Services.GetService<ITimeService>();
+    await context.Response.WriteAsync($"Time: {timeService?.GetTime()}");
+});*/
+
+// -------- Service as a specific class --------
+app.Run(async context =>
+{
+    var timeService = context.RequestServices.GetService<TimeService>();
     await context.Response.WriteAsync($"Time: {timeService?.GetTime()}");
 });
 app.Run();
