@@ -6,7 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 // builder.Services.AddMvc();
 // var services = builder.Services;
 
-// builder.Services.AddTransient<ITimeService, LongTimeService>();
+builder.Services.AddTransient<ITimeService, ShortTimeService>();
 
 // builder.Services.AddTransient<TimeService>();
 
@@ -49,5 +49,12 @@ var app = builder.Build();
 
 
 // -------- Extension for adding services ----------
+// code in line 11...
 
+// ===================== Getting dependencies ====================
+app.Run(async (context) =>
+{
+    var timeService = app.Services.GetRequiredService<ITimeService>();
+    await context.Response.WriteAsync($"Time: {timeService?.GetTime()}");
+});
 app.Run();
