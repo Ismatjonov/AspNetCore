@@ -11,7 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 // builder.Services.AddTransient<TimeService>();
 
 builder.Services.AddTransient<ITimeService, ShortTimeService>();
-builder.Services.AddTransient<TimeMessage>();
+// builder.Services.AddTransient<TimeMessage>();
 
 // builder.Services.AddTimeService();
 
@@ -70,10 +70,13 @@ var app = builder.Build();
 });*/
 
 // ---------- Constructors ----------
-app.Run(async context =>
+/*app.Run(async context =>
 {
     var timeMessage = context.RequestServices.GetService<TimeMessage>();
     context.Response.ContentType = "text/html; charset=utf-8";
     await context.Response.WriteAsync($"<h2>{timeMessage?.GetTime()}</h2>");
-});
+});*/
+
+// ---------- Method Invoke/InvokeAsync with middleware components ----------
+app.UseMiddleware<TimeServiceMiddleware>();
 app.Run();
