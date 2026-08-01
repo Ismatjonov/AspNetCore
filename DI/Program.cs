@@ -1,26 +1,39 @@
 using System.Text;
 using DI;
+using DI.CounterServices;
 using Microsoft.Extensions.Primitives;
 
 var builder = WebApplication.CreateBuilder(args);
-// builder.Services.AddMvc();
-// var services = builder.Services;
+// builder.TimeServices.AddMvc();
+// var services = builder.TimeServices;
+
+// builder.TimeServices.AddTransient<ITimeService, ShortTimeService>();
+
+// builder.TimeServices.AddTransient<TimeService>();
 
 // builder.Services.AddTransient<ITimeService, ShortTimeService>();
+// builder.TimeServices.AddTransient<TimeMessage>();
 
-// builder.Services.AddTransient<TimeService>();
+// builder.TimeServices.AddTimeService();
 
-builder.Services.AddTransient<ITimeService, ShortTimeService>();
-// builder.Services.AddTransient<TimeMessage>();
+// using AddTransient()
+/*builder.Services.AddTransient<ICounter, RandomCounter>();
+builder.Services.AddTransient<CounterService>();*/
 
-// builder.Services.AddTimeService();
+// using AddScoped()
+/*builder.Services.AddScoped<ICounter, RandomCounter>();
+builder.Services.AddScoped<CounterService>();*/
+
+// using AddSingleton()
+builder.Services.AddSingleton<ICounter, RandomCounter>();
+builder.Services.AddSingleton<CounterService>();
 
 var app = builder.Build();
 
 /*app.Run(async (context) =>
 {
     var sb = new StringBuilder();
-    sb.Append("<h1>All Services</h1>");
+    sb.Append("<h1>All TimeServices</h1>");
     sb.Append("<table border='1' cellpadding='0' cellspacing='0'>");
     sb.Append("<tr><th>Type</th><th>Lifetime</th><th>Realization</th></tr>");
     foreach (var svc in services)
@@ -39,7 +52,7 @@ var app = builder.Build();
 // =============== Creating services ===============
 /*app.Run(async context =>
 {
-    var timeService = app.Services.GetService<ITimeService>();
+    var timeService = app.TimeServices.GetService<ITimeService>();
     await context.Response.WriteAsync($"Time: {timeService?.GetTime()}");
 });*/
 
@@ -57,7 +70,7 @@ var app = builder.Build();
 // ===================== Getting dependencies ====================
 /*app.Run(async (context) =>
 {
-    var timeService = app.Services.GetRequiredService<ITimeService>();
+    var timeService = app.TimeServices.GetRequiredService<ITimeService>();
     await context.Response.WriteAsync($"Time: {timeService?.GetTime()}");
 });*/
 
@@ -78,5 +91,10 @@ var app = builder.Build();
 });*/
 
 // ---------- Method Invoke/InvokeAsync with middleware components ----------
-app.UseMiddleware<TimeServiceMiddleware>();
+/*app.UseMiddleware<TimeServiceMiddleware>();
+app.Run();*/
+
+
+// ==================== Life cycle of dependencies ====================
+app.UseMiddleware<CounterMiddleware>();
 app.Run();
