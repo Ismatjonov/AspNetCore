@@ -2,5 +2,9 @@ namespace DI;
 
 public class TimeService
 {
-    public string GetTime() => DateTime.Now.ToShortTimeString();
+    public TimeService()
+    {
+        Time = DateTime.Now.ToLongTimeString();
+    }
+    public string Time { get; }
 }

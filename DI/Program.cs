@@ -27,9 +27,12 @@ builder.Services.AddScoped<CounterService>();*/
 // using AddSingleton()
 /*builder.Services.AddSingleton<ICounter, RandomCounter>();
 builder.Services.AddSingleton<CounterService>();*/
-RandomCounter rndCounter = new RandomCounter();
+/*RandomCounter rndCounter = new RandomCounter();
 builder.Services.AddSingleton<ICounter>(rndCounter);
-builder.Services.AddSingleton<CounterService>(new CounterService(rndCounter));
+builder.Services.AddSingleton<CounterService>(new CounterService(rndCounter));*/
+
+// using services in middleware classes
+builder.Services.AddTransient<TimeService>();
 
 
 var app = builder.Build();
@@ -100,5 +103,10 @@ app.Run();*/
 
 
 // ==================== Life cycle of dependencies ====================
-app.UseMiddleware<CounterMiddleware>();
+/*app.UseMiddleware<CounterMiddleware>();
+app.Run();*/
+
+// =============== Using services in middleware classes ===============
+app.UseMiddleware<TimerMiddleware>();
+app.Run(async context => await context.Response.WriteAsync("<h1>Hello Metanit.com</h1>"));
 app.Run();
