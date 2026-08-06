@@ -3,15 +3,12 @@ namespace DI;
 public class TimerMiddleware
 {
     RequestDelegate next;
-    TimeService timeService;
-
-    public TimerMiddleware(RequestDelegate next, TimeService timeService)
+    public TimerMiddleware(RequestDelegate next)
     {
         this.next = next;
-        this.timeService = timeService;
     }
 
-    public async Task InvokeAsync(HttpContext context)
+    public async Task InvokeAsync(HttpContext context, TimeService timeService)
     {
         if (context.Request.Path == "/time")
         {
