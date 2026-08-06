@@ -25,8 +25,12 @@ builder.Services.AddTransient<CounterService>();*/
 builder.Services.AddScoped<CounterService>();*/
 
 // using AddSingleton()
-builder.Services.AddSingleton<ICounter, RandomCounter>();
-builder.Services.AddSingleton<CounterService>();
+/*builder.Services.AddSingleton<ICounter, RandomCounter>();
+builder.Services.AddSingleton<CounterService>();*/
+RandomCounter rndCounter = new RandomCounter();
+builder.Services.AddSingleton<ICounter>(rndCounter);
+builder.Services.AddSingleton<CounterService>(new CounterService(rndCounter));
+
 
 var app = builder.Build();
 
