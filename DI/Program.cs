@@ -1,6 +1,7 @@
 using System.Text;
 using DI;
 using DI.CounterServices;
+using DI.GeneratorServices;
 using DI.HelloServices;
 using Microsoft.Extensions.Primitives;
 
@@ -40,9 +41,15 @@ builder.Services.AddSingleton<CounterService>(new CounterService(rndCounter));*/
 /*builder.Services.AddTransient<ITimer, Timer>();
 builder.Services.AddScoped<TimeService>();*/
 
+
+
 // Registering multiple types for one dependency
-builder.Services.AddTransient<IHelloService, RuHelloService>();
-builder.Services.AddTransient<IHelloService, EnHelloService>();
+/*builder.Services.AddTransient<IHelloService, RuHelloService>();
+builder.Services.AddTransient<IHelloService, EnHelloService>();*/
+
+// Registration one object for multiple dependencies
+builder.Services.AddSingleton<IGenerator, ValueStorage>();
+builder.Services.AddSingleton<IRead, ValueStorage>();
 
 var app = builder.Build();
 
@@ -126,5 +133,9 @@ app.Run();*/
 
 
 // ==================== Multiple registration of services ====================
-app.UseMiddleware<HelloMiddleware>();
+/*app.UseMiddleware<HelloMiddleware>();
+app.Run();*/
+
+app.UseMiddleware<GeneratorMiddleware>();
+app.UseMiddleware<ReadMiddleware>();
 app.Run();
