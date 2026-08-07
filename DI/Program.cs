@@ -32,8 +32,12 @@ builder.Services.AddSingleton<ICounter>(rndCounter);
 builder.Services.AddSingleton<CounterService>(new CounterService(rndCounter));*/
 
 // using services in middleware classes
-builder.Services.AddTransient<TimeService>();
+// builder.Services.AddTransient<TimeService>();
 
+
+// scoped-services in singleton-objects
+/*builder.Services.AddTransient<ITimer, Timer>();
+builder.Services.AddScoped<TimeService>();*/
 
 var app = builder.Build();
 
@@ -107,6 +111,10 @@ app.Run();*/
 app.Run();*/
 
 // =============== Using services in middleware classes ===============
-app.UseMiddleware<TimerMiddleware>();
+/*app.UseMiddleware<TimerMiddleware>();
 app.Run(async context => await context.Response.WriteAsync("<h1>Hello Metanit.com</h1>"));
-app.Run();
+app.Run();*/
+
+// ==================== Scoped-services in Singleton-objects ====================
+/*app.UseMiddleware<TimerMiddleware>();
+app.Run();*/
