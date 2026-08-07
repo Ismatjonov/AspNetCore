@@ -1,6 +1,7 @@
 using System.Text;
 using DI;
 using DI.CounterServices;
+using DI.HelloServices;
 using Microsoft.Extensions.Primitives;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -38,6 +39,10 @@ builder.Services.AddSingleton<CounterService>(new CounterService(rndCounter));*/
 // scoped-services in singleton-objects
 /*builder.Services.AddTransient<ITimer, Timer>();
 builder.Services.AddScoped<TimeService>();*/
+
+// Registering multiple types for one dependency
+builder.Services.AddTransient<IHelloService, RuHelloService>();
+builder.Services.AddTransient<IHelloService, EnHelloService>();
 
 var app = builder.Build();
 
@@ -118,3 +123,8 @@ app.Run();*/
 // ==================== Scoped-services in Singleton-objects ====================
 /*app.UseMiddleware<TimerMiddleware>();
 app.Run();*/
+
+
+// ==================== Multiple registration of services ====================
+app.UseMiddleware<HelloMiddleware>();
+app.Run();
