@@ -48,8 +48,9 @@ builder.Services.AddScoped<TimeService>();*/
 builder.Services.AddTransient<IHelloService, EnHelloService>();*/
 
 // Registration one object for multiple dependencies
-builder.Services.AddSingleton<IGenerator, ValueStorage>();
-builder.Services.AddSingleton<IRead, ValueStorage>();
+ValueStorage valueStorage = new ValueStorage();
+builder.Services.AddSingleton<IGenerator>(valueStorage);
+builder.Services.AddSingleton<IRead>(valueStorage);
 
 var app = builder.Build();
 
