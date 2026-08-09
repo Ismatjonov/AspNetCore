@@ -19,6 +19,12 @@ app.Map("/log", () => Console.WriteLine("Request Path: /log"));
 app.Map("/", IndexHandler);
 app.Map("/user", UserHandler);
 
+// another version of method with RequestDelegate
+app.Map("/about", async context =>
+{
+    await context.Response.WriteAsync("About Page!");
+});
+
 app.Run();
 
 string IndexHandler()
