@@ -25,6 +25,10 @@ app.Map("/about", async context =>
     await context.Response.WriteAsync("About Page!");
 });
 
+// ---------- Getting all routes of app ----------
+app.MapGet("/routes", (IEnumerable<EndpointDataSource> endpointDataSource) =>
+    string.Join("\n", endpointDataSource.SelectMany(source => source.Endpoints)));
+
 app.Run();
 
 string IndexHandler()
