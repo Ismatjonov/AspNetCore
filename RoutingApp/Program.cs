@@ -1,4 +1,5 @@
 using RoutingApp;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
@@ -26,9 +27,25 @@ app.Map("/about", async context =>
 });
 
 // ---------- Getting all routes of app ----------
-app.MapGet("/routes", (IEnumerable<EndpointDataSource> endpointDataSource) =>
-    string.Join("\n", endpointDataSource.SelectMany(source => source.Endpoints)));
+/*app.MapGet("/routes", (IEnumerable<EndpointDataSource> endpointDataSource) =>
+    string.Join("\n", endpointDataSource.SelectMany(source => source.Endpoints)));*/
 
+// getting detailed information
+app.Map("/routes", (IEnumerable<EndpointDataSource> endpointsDataSource) =>
+{
+    var sb = new StringBuilder();
+    var endpoints = endpointsDataSource.SelectMany(es => es.Endpoints);
+    foreach (var endpoint in endpoints)
+    {
+        sb.AppendLine(endpoint.DisplayName);
+        if (endpoint is RouteEndpoint routeEndpoint)
+        {
+            sb.AppendLine(routeEndpoint.RoutePattern.RawText);
+        }
+    }
+
+    return sb.ToString();
+});
 app.Run();
 
 string IndexHandler()
