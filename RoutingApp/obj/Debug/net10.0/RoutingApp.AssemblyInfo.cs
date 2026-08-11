@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("RoutingApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+388eba32315f0fb9efb0a364aec41218924aff2d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+39ec90eb646128c74e12840c48bce930703c5235")]
 [assembly: System.Reflection.AssemblyProductAttribute("RoutingApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RoutingApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

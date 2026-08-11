@@ -72,8 +72,16 @@ app.Map("/users", () => "Users Page");
 app.Map("/", () => "Index Page");*/
 
 // ---------- Optional route parameters ----------
-app.Map("/users/{id?}", (string? id) => $"User Id: {id??"Undefined"}");
-app.Map("/", () => "Index Page");
+/*app.Map("/users/{id?}", (string? id) => $"User Id: {id??"Undefined"}");
+app.Map("/", () => "Index Page");*/
+
+// --------- Default parameters values ---------
+app.Map(
+    "{controller=Home}/{action=Index}/{id?}",
+    (string controller, string action, string? id) =>
+        $"Controller: {controller} \nAction: {action} \nId: {id}"
+    );
+
 app.Run();
 
 ///////////////////////// Program Methods
