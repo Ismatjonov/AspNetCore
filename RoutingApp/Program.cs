@@ -76,11 +76,15 @@ app.Map("/", () => "Index Page");*/
 app.Map("/", () => "Index Page");*/
 
 // --------- Default parameters values ---------
-app.Map(
+/*app.Map(
     "{controller=Home}/{action=Index}/{id?}",
     (string controller, string action, string? id) =>
         $"Controller: {controller} \nAction: {action} \nId: {id}"
-    );
+    );*/
+
+// ---------- Passing an arbitrary number of parameters in a request ----------
+app.Map("users/{**info}", (string? info) => $"User Info: {info}");
+app.Map("/", () => "Index Page");
 
 app.Run();
 
