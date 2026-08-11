@@ -55,12 +55,13 @@ app.Map("/users", () => "Users Page");
 app.Map("/", () => "Index Page");*/
 
 // ---------- Defining multiple parameters ----------
-app.Map("/users/{id}/{name}", (string id, string name) => $"User Id: {id},  User Name: {name}");
+/*app.Map("/users/{id}/{name}", (string id, string name) => $"User Id: {id},  User Name: {name}");
 app.Map("/users", () => "Users Page");
+app.Map("/", () => "Index Page");*/
+
+// ---------- Separators ----------
+app.Map("/users/{id}-{name}", (string id, string name) => $"User id: {id}, name: {name}");
 app.Map("/", () => "Index Page");
-
-app.Run();
-
 app.Run();
 
 string IndexHandler()
