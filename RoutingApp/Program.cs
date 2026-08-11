@@ -60,7 +60,10 @@ app.Map("/users", () => "Users Page");
 app.Map("/", () => "Index Page");*/
 
 // ---------- Separators ----------
-app.Map("/users/{id}-{name}", (string id, string name) => $"User id: {id}, name: {name}");
+// app.Map("/users/{id}-{name}", (string id, string name) => $"User id: {id}, name: {name}");
+
+app.Map("/users/{id}and{name}", (string id, string name) => $"User id is {id} and name is {name}");
+
 app.Map("/", () => "Index Page");
 app.Run();
 
