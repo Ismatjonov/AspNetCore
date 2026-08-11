@@ -50,9 +50,16 @@ app.Run();*/
 
 
 // ==================== Route Parameters ====================
-app.Map("/users/{id}", (string id) => $"User Id: {id}");
+/*app.Map("/users/{id}", (string id) => $"User Id: {id}");
+app.Map("/users", () => "Users Page");
+app.Map("/", () => "Index Page");*/
+
+// ---------- Defining multiple parameters ----------
+app.Map("/users/{id}/{name}", (string id, string name) => $"User Id: {id},  User Name: {name}");
 app.Map("/users", () => "Users Page");
 app.Map("/", () => "Index Page");
+
+app.Run();
 
 app.Run();
 
