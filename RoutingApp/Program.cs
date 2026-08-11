@@ -67,8 +67,12 @@ app.Map("/", () => "Index Page");*/
 app.Map("/", () => "Index Page");*/
 
 // ---------- Moving the route handler into a separate method ----------
-app.Map("/users/{id}/{name}", HandleRequest);
+/*app.Map("/users/{id}/{name}", HandleRequest);
 app.Map("/users", () => "Users Page");
+app.Map("/", () => "Index Page");*/
+
+// ---------- Optional route parameters ----------
+app.Map("/users/{id?}", (string? id) => $"User Id: {id??"Undefined"}");
 app.Map("/", () => "Index Page");
 app.Run();
 
