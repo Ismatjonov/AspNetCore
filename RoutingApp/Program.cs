@@ -83,8 +83,16 @@ app.Map("/", () => "Index Page");*/
     );*/
 
 // ---------- Passing an arbitrary number of parameters in a request ----------
-app.Map("users/{**info}", (string? info) => $"User Info: {info}");
-app.Map("/", () => "Index Page");
+/*app.Map("users/{**info}", (string? info) => $"User Info: {info}");
+app.Map("/", () => "Index Page");*/
+
+// Route restrictions
+/*app.Map("/user/{id}", (int id) => $"User Id: {id}");
+app.Map("/", () => "Index Page!");*/
+
+app.Map("/user/{id:int}", (int id) => $"User Id: {id}");
+app.Map("/", () => "Index Page!");
+
 
 app.Run();
 
