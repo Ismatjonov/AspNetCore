@@ -90,10 +90,10 @@ app.Map("/", () => "Index Page");*/
 /*app.Map("/user/{id}", (int id) => $"User Id: {id}");
 app.Map("/", () => "Index Page!");*/
 
-app.Map("/user/{id:int}", (int id) => $"User Id: {id}");
+app.Map("/user/{date:datetime}", (DateTime date) => $"User Id: {date}");
 app.Map("/", () => "Index Page!");
 
-
+// 
 app.Run();
 
 ///////////////////////// Program Methods
