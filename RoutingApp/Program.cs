@@ -90,7 +90,7 @@ app.Map("/", () => "Index Page");*/
 /*app.Map("/user/{id}", (int id) => $"User Id: {id}");
 app.Map("/", () => "Index Page!");*/
 
-app.Map("/user/{id:int}", (int id) => $"User Id: {id}");
+/*app.Map("/user/{id:int}", (int id) => $"User Id: {id}");
 app.Map("/`user/{active:bool}", (bool isActive) => $"Active User: {isActive}");
 app.Map("/user/{date:datetime}", (DateTime date) => $"User Date: {date}");
 app.Map("/user/{price:decimal}", (decimal price) => $"User Price: {price}");
@@ -107,9 +107,15 @@ app.Map("/user/{age:range(19, 99)}", (int age) => $"User Age: {age}");
 app.Map("/user/{name:alpha}", (string name) => $"User Name: {name}");
 app.Map("/user/{phone:regex(^\\d{{3}}-\\d{{3}}-\\d{{4}}$)}", (string phone) => $"Phone Number: {phone}");
 app.Map("/user/{email:required}", (string email) => $"User Email: {email}");
-app.Map("/", () => "Index Page!");
+app.Map("/", () => "Index Page!");*/
 
-// 
+// ------ Combining the constraints --------
+app.Map(
+    "/users/{name:alpha:minLength(3)}/{age:int:range(18,110)}",
+    (string name, int age) => $"User Age: {age} \nUser Name: {name}");
+app.Map("/phonebook/{phone:regex(^992-\\d{{2}}-\\d{{3}}-\\d{{2}}-\\d{{2}}$)}/",
+    (string phone) => $"Phone Number: {phone}");
+app.Map("/", () => "Index Page");
 app.Run();
 
 ///////////////////////// Program Methods
