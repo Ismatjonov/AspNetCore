@@ -90,7 +90,23 @@ app.Map("/", () => "Index Page");*/
 /*app.Map("/user/{id}", (int id) => $"User Id: {id}");
 app.Map("/", () => "Index Page!");*/
 
-app.Map("/user/{date:datetime}", (DateTime date) => $"User Id: {date}");
+app.Map("/user/{id:int}", (int id) => $"User Id: {id}");
+app.Map("/`user/{active:bool}", (bool isActive) => $"Active User: {isActive}");
+app.Map("/user/{date:datetime}", (DateTime date) => $"User Date: {date}");
+app.Map("/user/{price:decimal}", (decimal price) => $"User Price: {price}");
+app.Map("/user/{weight:double}", (double weight) => $"User Weight: {weight}");
+app.Map("/user/{height:float}", (float height) => $"User Height: {height}");
+app.Map("/user/{id:guid}", (Guid id) => $"User Guid: {id}");
+app.Map("/user/{id:long}", (long id) => $"User Id: {id}");
+app.Map("/user/{name:minLength(3)}", (string name) => $"User Name: {name}");
+app.Map("/user/{name:maxLength(20)}", (string name) => $"User Name: {name}");
+app.Map("/user/{name:length(10)}", (string name) => $"User Name: {name}");
+app.Map("/user/{age:min(3)}", (int age) => $"User Age: {age}");
+app.Map("/user/{age:max(20)}", (int age) => $"User Age: {age}");
+app.Map("/user/{age:range(19, 99)}", (int age) => $"User Age: {age}");
+app.Map("/user/{name:alpha}", (string name) => $"User Name: {name}");
+app.Map("/user/{phone:regex(^\\d{{3}}-\\d{{3}}-\\d{{4}}$)}", (string phone) => $"Phone Number: {phone}");
+app.Map("/user/{email:required}", (string email) => $"User Email: {email}");
 app.Map("/", () => "Index Page!");
 
 // 
