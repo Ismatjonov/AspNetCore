@@ -2,6 +2,8 @@ using RoutingApp;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.Configure<RouteOptions>(options => 
+    options.ConstraintMap.Add("secretCode", typeof(SecretCodeConstraint)));
 var app = builder.Build();
 
 /*
@@ -110,12 +112,21 @@ app.Map("/user/{email:required}", (string email) => $"User Email: {email}");
 app.Map("/", () => "Index Page!");*/
 
 // ------ Combining the constraints --------
-app.Map(
+/*app.Map(
     "/users/{name:alpha:minLength(3)}/{age:int:range(18,110)}",
     (string name, int age) => $"User Age: {age} \nUser Name: {name}");
 app.Map("/phonebook/{phone:regex(^992-\\d{{2}}-\\d{{3}}-\\d{{2}}-\\d{{2}}$)}/",
     (string phone) => $"Phone Number: {phone}");
 app.Map("/", () => "Index Page");
+app.Run();*/
+
+// ========== Creating routing constraints ==========
+app.Map(
+    "/users/{name}/{token:secretcode(123456)}/",
+    (string name, int token) => $"Name: {name} \nToken: {token}"
+);
+app.Map("/", () => "Index Page");
+
 app.Run();
 
 ///////////////////////// Program Methods
